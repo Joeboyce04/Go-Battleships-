@@ -1,17 +1,8 @@
 package main
 
-type BattleshipGame struct {
-	Grid [7][7]string
-}
-
 func CreateGrid() [7][7]string {
 
 	var grid [7][7]string
-	for row := 0; row < 7; row++ {
-		for col := 0; col < 7; col++ {
-			grid[row][col] = "Empty"
-		}
-	}
 	return grid
 }
 
