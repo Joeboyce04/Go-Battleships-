@@ -1,10 +1,7 @@
 package main
 
 type BattleshipGame struct {
-	Grid           [7][7]string
-	ShipsRemaining int
-	PlayerTurn     bool
-	GameStatus     string
+	Grid [7][7]string
 }
 
 func CreateGrid() [7][7]string {
