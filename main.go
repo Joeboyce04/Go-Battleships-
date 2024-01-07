@@ -28,43 +28,28 @@ func PlayerTwoPlaceShips(grid [7][7]string) [7][7]string {
 	return grid
 }
 
-func PlayerOneTakeShots(grid [7][7]string, col, row int) ([7][7]string, string, bool) {
+func PlayerOneTakeShots(grid [7][7]string, col, row int) [7][7]string {
 	if col < 0 || col >= 7 || row < 0 || row >= 7 {
-		return grid, "error", false
+		return grid
 	}
-	result := "*"
-	hit := false
-	if grid[row][col] == "Hit" {
-		result = "Already hit"
-	} else if grid[row][col] == "Ship" {
+	if grid[row][col] == "Ship" {
 		grid[row][col] = "Hit"
-		result = "Hit"
-		hit = true
-	} else {
+	} else if grid[row][col] != "Hit" {
 		grid[row][col] = "Miss"
-		result = "Miss"
 	}
-	return grid, result, hit
+	return grid
 }
 
-func PlayerTwoTakeShots(grid [7][7]string, col, row int) ([7][7]string, string, bool) {
+func PlayerTwoTakeShots(grid [7][7]string, col, row int) [7][7]string {
 	if col < 0 || col >= 7 || row < 0 || row >= 7 {
-		return grid, "error", false
+		return grid
 	}
-	result := "*"
-	hit := false
-	if grid[row][col] == "Hit" {
-		result = "Already hit"
-	} else if grid[row][col] == "Ship" {
+	if grid[row][col] == "Ship" {
 		grid[row][col] = "Hit"
-		result = "Hit"
-		hit = true
-	} else {
+	} else if grid[row][col] != "Hit" {
 		grid[row][col] = "Miss"
-		result = "Miss"
 	}
-	return grid, result, hit
-
+	return grid
 }
 
 //func allShipsHit(grid [7][7]string) bool {}
