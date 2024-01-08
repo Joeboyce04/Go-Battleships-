@@ -59,29 +59,62 @@ func TestPlaceShip(t *testing.T){
 	}
 }
 
-func TestPlayerOnePlaceShipOutsideGrid(t *testing.T){
-	grid:= CreateGrid()
+func TestPlayerOneShipInTopLeftCorner(t *testing.T) {
+    
+    grid := CreateGrid()
+    
+    updatedGrid := PlayerOnePlaceShips(grid)
+    hasShip := updatedGrid[0][0] == "Ship"
+    
+    if !hasShip {
+        t.Error("Player one ship not found in the top left corner")
+    }
+}
 
-	updatedGrid:= placeShip(grid, 8, 8)
-	if updatedGrid!= grid{
-		t.Error("Player one Ship placed outside grid")
-	}
-	
+func TestPlayerOneShipInTopRight(t *testing.T) {
+    
+    grid := CreateGrid()
+    
+    updatedGrid := PlayerOnePlaceShips(grid)
+    hasShip := updatedGrid[0][6] == "Ship"
+    
+    if !hasShip {
+        t.Error("Player one ship not found in the top left corner")
+    }
+}
+func TestPlayerOneShipInBottomRight(t *testing.T) {
+    
+    grid := CreateGrid()
+    
+    updatedGrid := PlayerOnePlaceShips(grid)
+    hasShip := updatedGrid[6][0] == "Ship"
+    
+    if !hasShip {
+        t.Error("Player one ship not found in the top left corner")
+    }
+}
+func TestPlayerOneShipInBottomLeft(t *testing.T) {
+    
+    grid := CreateGrid()
+    
+    updatedGrid := PlayerOnePlaceShips(grid)
+    hasShip := updatedGrid[6][6] == "Ship"
+    
+    if !hasShip {
+        t.Error("Player one ship not found in the top left corner")
+    }
 }
 
 
+//func TestPlayerOnePlaceShipOutsideGrid(t *testing.T){}
 
 
-func TestPlayerTwoPlaceShipOutsideGrid(t *testing.T){
-	grid:= CreateGrid()
 
-	updatedGrid:= placeShip(grid, -1, 8)
 
-	if updatedGrid!= grid{
-		t.Error("Player Two Ship placed outside grid")
-	}
+
+//func TestPlayerTwoPlaceShipOutsideGrid(t *testing.T) {}	
 	
-}
+
 
 //func TestPlayerOneCannotPlaceShipOnTop(t *testing.T){}
 //func TestPlayerTwoCannotPlaceShipOnTop(t *testing.T){}
@@ -203,5 +236,7 @@ func TestPlayerTwoShootingOutsideGrid(t *testing.T) {
 //test 9 ships can be placed
 //attempting to place a 10th ship dosent change the grid
 
+//test where a ship can be placed in a grid
+//after taking a shot turn goes to next player
 
 

@@ -19,12 +19,17 @@ func placeShip(grid [7][7]string, col, row int) [7][7]string {
 func PlayerOnePlaceShips(grid [7][7]string) [7][7]string {
 	grid = placeShip(grid, 1, 2)
 	grid = placeShip(grid, 3, 4)
+	grid = placeShip(grid, 6, 6)
+	grid = placeShip(grid, 0, 0)
+	grid = placeShip(grid, 0, 6)
+	grid = placeShip(grid, 6, 0)
 	return grid
 }
 
 func PlayerTwoPlaceShips(grid [7][7]string) [7][7]string {
 	grid = placeShip(grid, 2, 3)
 	grid = placeShip(grid, 5, 6)
+
 	return grid
 }
 
