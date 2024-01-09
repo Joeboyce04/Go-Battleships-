@@ -24,6 +24,8 @@ func PlayerOnePlaceShips(grid [7][7]string) [7][7]string {
 	grid = placeShip(grid, 0, 6)
 	grid = placeShip(grid, 6, 0)
 	grid = placeShip(grid, 1, 1)
+	grid = placeShip(grid, 5, 4)
+	grid = placeShip(grid, 3, 2)
 
 	return grid
 }

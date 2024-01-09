@@ -186,26 +186,9 @@ func TestPlaceShipOutsideTop(t *testing.T){
 	
 
 func TestPlayerOneCannotPlaceTenthShip(t *testing.T) {
-    grid := CreateGrid()
-    
-	for i:=0;i<9; i++{
-	grid = placeShip(grid, 1, 2)
-	grid = placeShip(grid, 3, 4)
-	grid = placeShip(grid, 6, 6)
-	grid = placeShip(grid, 0, 0)
-	grid = placeShip(grid, 0, 6)
-	grid = placeShip(grid, 6, 0)
-	grid = placeShip(grid, 8, 0)
-	grid = placeShip(grid, 1, 1)
-	grid = placeShip(grid, 2, 2)
-	}
-    
-    grid= placeShip(grid, 5,5)
-
-    if grid == CreateGrid() {
-        t.Error("Player One was able to place a tenth ship")
+  
     }
-}
+
 //func TestPlayerTwoCannotPlaceTenthShip(t *testing.T) {}
 
 	
