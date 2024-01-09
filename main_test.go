@@ -106,7 +106,7 @@ func TestPlayerOneShipInBottomLeft(t *testing.T) {
 }
 
 
-func TestPlayerOnePlaceShipOutsideGrid(t *testing.T) {
+/*func TestPlayerOnePlaceShipOutsideGrid(t *testing.T) {
     grid:=CreateGrid()
 
 	updatedGrid:= placeShip(grid,8,8)
@@ -125,7 +125,7 @@ func TestPlayerTwoPlaceShipOutsideGrid(t *testing.T){
 		t.Error("Player Two ship is outside grid")
 	}
 
-}
+} */
 
 //func TestCannotPlaceShipOnTopOfAnother(t *testing.T){}
 
@@ -135,10 +135,40 @@ func TestPlaceShipOutsideLeft(t *testing.T){
 	updateGrid:= placeShip(grid, -1, 0)
 
 	if updateGrid !=grid{
-		t.Error("Player one placed ship outside grid")
+		t.Error("Player placed ship outside grid to the left")
 	}
 }
 
+func TestPlaceShipOutsideRight(t *testing.T){
+	grid :=CreateGrid()
+
+	updateGrid:= placeShip(grid, 7, 0)
+
+	if updateGrid !=grid{
+		t.Error("Player placed ship outside grid to the right")
+	}
+
+}
+
+func TestPlaceShipOutsideBottom(t *testing.T){
+	grid :=CreateGrid()
+
+	updateGrid:= placeShip(grid, 0, 7)
+
+	if updateGrid !=grid{
+		t.Error("Player placed ship outside grid to the bottom")
+	}
+}
+
+func TestPlaceShipOutsideTop(t *testing.T){
+	grid :=CreateGrid()
+
+	updateGrid:= placeShip(grid, 0, -1)
+
+	if updateGrid !=grid{
+		t.Error("Player placed ship outside grid to the top")
+	}
+}
 
 //func TestPlayerOneCannotPlaceShipOnTop(t *testing.T) {}
 

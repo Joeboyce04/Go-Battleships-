@@ -23,8 +23,7 @@ func PlayerOnePlaceShips(grid [7][7]string) [7][7]string {
 	grid = placeShip(grid, 0, 0)
 	grid = placeShip(grid, 0, 6)
 	grid = placeShip(grid, 6, 0)
-	grid = placeShip(grid, -1, 1)
-	grid = placeShip(grid, 8, 8)
+	grid = placeShip(grid, 1, 1)
 
 	return grid
 }
@@ -32,7 +31,7 @@ func PlayerOnePlaceShips(grid [7][7]string) [7][7]string {
 func PlayerTwoPlaceShips(grid [7][7]string) [7][7]string {
 	grid = placeShip(grid, 2, 3)
 	grid = placeShip(grid, 5, 6)
-	grid = placeShip(grid, 10, 10)
+
 	return grid
 }
 
