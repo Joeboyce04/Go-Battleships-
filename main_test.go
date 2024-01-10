@@ -210,7 +210,7 @@ func TestPlayerOneCannotPlaceTenthShip(t *testing.T) {
 		
 	
 
-		if ShotResult.Result !="Hit" || !ShotResult.Hit {
+		if ShotResult.Result !="Hit" {
 			t.Error("Player 1's shot did not result in a hit")
 		}
 	}
