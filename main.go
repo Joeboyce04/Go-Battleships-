@@ -1,5 +1,10 @@
 package main
 
+type Shot struct {
+	Hit    bool
+	Result string
+}
+
 func CreateGrid() [7][7]string {
 
 	var grid [7][7]string
@@ -37,16 +42,25 @@ func PlayerTwoPlaceShips(grid [7][7]string) [7][7]string {
 	return grid
 }
 
-func PlayerOneTakeShots(grid [7][7]string, col, row int) [7][7]string {
+func PlayerOneTakeShots(grid [7][7]string, col, row int) Shot {
 	if col < 0 || col >= 7 || row < 0 || row >= 7 {
-		return grid
+		return Shot{Result: "Error shot outside Grid", Hit: false}
 	}
-	if grid[row][col] == "Ship" {
+	shot := Shot{Result: "", Hit: false}
+
+	if grid[row][col] == "Hit" {
+		shot.Result = "Already Hit"
+		shot.Hit = false
+	} else if grid[row][col] == "Ship" {
 		grid[row][col] = "Hit"
-	} else if grid[row][col] != "Hit" {
+		shot.Result = "Hit"
+		shot.Hit = true
+	} else {
 		grid[row][col] = "Miss"
+		shot.Result = "Miss"
+		shot.Hit = false
 	}
-	return grid
+	return shot
 }
 
 func PlayerTwoTakeShots(grid [7][7]string, col, row int) [7][7]string {
