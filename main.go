@@ -43,7 +43,7 @@ func PlayerTwoPlaceShips(grid [7][7]string) [7][7]string {
 
 func PlayerOneTakeShots(grid [7][7]string, col, row int) Shot {
 	if col < 0 || col >= 7 || row < 0 || row >= 7 {
-		return Shot{Result: "Miss"}
+		return Shot{Result: "Error outside grid"}
 	}
 	shot := Shot{Result: "Miss"}
 
@@ -59,16 +59,22 @@ func PlayerOneTakeShots(grid [7][7]string, col, row int) Shot {
 	return shot
 }
 
-func PlayerTwoTakeShots(grid [7][7]string, col, row int) [7][7]string {
+func PlayerTwoTakeShots(grid [7][7]string, col, row int) Shot {
 	if col < 0 || col >= 7 || row < 0 || row >= 7 {
-		return grid
+		return Shot{Result: "Error outside grid"}
 	}
-	if grid[row][col] == "Ship" {
+	shot := Shot{Result: "Miss"}
+
+	if grid[row][col] == "Hit" {
+		shot.Result = "Already Hit"
+	} else if grid[row][col] == "Ship" {
 		grid[row][col] = "Hit"
-	} else if grid[row][col] != "Hit" {
+		shot.Result = "Hit"
+	} else {
 		grid[row][col] = "Miss"
+		shot.Result = "Miss"
 	}
-	return grid
+	return shot
 }
 
 //func allShipsHit(grid [7][7]string) bool {}

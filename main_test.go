@@ -222,26 +222,28 @@ func TestPlayerOneCannotPlaceTenthShip(t *testing.T) {
 		col := 1
 		row := 2
 		
-		updatedGrid:= PlayerTwoTakeShots(grid, col, row)
+		ShotResult:= PlayerTwoTakeShots(grid, col, row)
 		
-		
-		if updatedGrid==grid || updatedGrid[row][col]!="Hit"{
+	
+
+		if ShotResult.Result !="Hit" {
 			t.Error("Player 2's shot did not result in a hit")
 		}
 	}
 
-	/* func TestPlayerOneMiss(t *testing.T) {
+	 func TestPlayerOneMiss(t *testing.T) {
 		grid := CreateGrid()
 		grid = PlayerTwoPlaceShips(grid)
 		
-		col := 1
-		row := 2
+		col := 4
+		row := 4
 		
-		updatedGrid := PlayerOneTakeShots(grid, col, row)
+		ShotResult:= PlayerOneTakeShots(grid, col, row)
 		
-		
-		if updatedGrid==grid || updatedGrid[row][col] !="Miss" {
-			t.Error("Player 1's shot did not result in a miss")
+	
+
+		if ShotResult.Result !="Miss" {
+			t.Error("Player 1's shot should have missed")
 		}
 	}
 	
@@ -250,29 +252,31 @@ func TestPlayerOneCannotPlaceTenthShip(t *testing.T) {
 		grid := CreateGrid()
 		grid = PlayerOnePlaceShips(grid)
 		
-		col := 5
-		row := 5
+		col := 4
+		row := 3
 		
-		updatedGrid := PlayerTwoTakeShots(grid, col, row)
+		ShotResult:= PlayerTwoTakeShots(grid, col, row)
 		
-		
-		if updatedGrid==grid || updatedGrid[row][col] !="Miss" {
-			t.Error("Player 1's shot did not result in a miss")
+	
+
+		if ShotResult.Result !="Miss" {
+			t.Error("Player 2's shot should have missed")
 		}
 	}
-/*
-/*func TestPlayerOneShootingOutsideGrid(t *testing.T) {
+
+func TestPlayerOneShootingOutsideGrid(t *testing.T) {
 	grid := CreateGrid()
     
-    col := -1
+    col := 8
     row := 8
     
-    updatedGrid := PlayerOneTakeShots(grid, col, row)          //CHANGE
+    ShotResult := PlayerOneTakeShots(grid, col, row)          
     
 
-    if updatedGrid != grid {
-        t.Error("Player 1 shot was out of bounds")
-    }
+   
+		if ShotResult.Result !="Error outside grid" {
+			t.Error("Player 1's shot was outside the grid")
+		}
 } 
 
 func TestPlayerTwoShootingOutsideGrid(t *testing.T) {
@@ -281,11 +285,11 @@ func TestPlayerTwoShootingOutsideGrid(t *testing.T) {
 		col := 8
 		row := -6
 
-		updatedGrid:= PlayerTwoTakeShots(grid, col, row)
+		ShotResult:= PlayerTwoTakeShots(grid, col, row)
 		
 		
-		if updatedGrid != grid {
-			t.Error("Player 2 shot was outside the grid")
+		if ShotResult.Result !="Error outside grid" {
+			t.Error("Player 2's shot was outside the grid")
 		}
 	}
 
