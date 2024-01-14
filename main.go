@@ -10,13 +10,34 @@ func CreateGrid() [7][7]string {
 	return grid
 }
 
+func CountOfShipOnBoard(grid [7][7]string) int {
+	count := 0
+
+	for _, row := range grid {
+		for _, location := range row {
+			if location == "Ship" {
+				count++
+			}
+
+		}
+	}
+	return count
+}
 func placeShip(grid [7][7]string, col, row int) [7][7]string {
 	if col < 0 || col >= 7 || row < 0 || row >= 7 {
 		return grid
 	}
 
-	grid[row][col] = "Ship"
+	if grid[row][col] == "Ship" {
+		return grid
+	}
 
+	shipCount := CountOfShipOnBoard(grid)
+	if shipCount == 9 {
+		return grid
+	}
+
+	grid[row][col] = "Ship"
 	return grid
 }
 
@@ -29,8 +50,7 @@ func PlayerOnePlaceShips(grid [7][7]string) [7][7]string {
 	grid = placeShip(grid, 6, 0)
 	grid = placeShip(grid, 1, 1)
 	grid = placeShip(grid, 5, 4)
-	grid = placeShip(grid, 3, 2)
-
+	grid = placeShip(grid, 3, 1)
 	return grid
 }
 

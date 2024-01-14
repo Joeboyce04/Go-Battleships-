@@ -127,11 +127,10 @@ func TestPlayerTwoPlaceShipOutsideGrid(t *testing.T){
 
 } */
 
-//func TestCannotPlaceShipOnTopOfAnother(t *testing.T){}
 
 func TestPlaceShipOutsideLeft(t *testing.T){
 	grid :=CreateGrid()
-
+	
 	updateGrid:= placeShip(grid, -1, 0)
 
 	if updateGrid !=grid{
@@ -148,7 +147,7 @@ func TestPlaceShipOutsideRight(t *testing.T){
 		t.Error("Player placed ship outside grid to the right")
 	}
 
-}
+} 
 
 func TestPlaceShipOutsideBottom(t *testing.T){
 	grid :=CreateGrid()
@@ -170,9 +169,32 @@ func TestPlaceShipOutsideTop(t *testing.T){
 	}
 }
 
-//func TestPlayerOneCannotPlaceShipOnTop(t *testing.T) {}
+func TestPlayerOneCannotPlaceShipOnTopOfAnother(t *testing.T) {
+}
+func TestPlayerOneShipsSunkTwice(t *testing.T){
+	
+	}
 
-//func TestPlayerTwoCannotPlaceShipOnTop(t *testing.T) {}
+
+
+
+func TestWinCondition(t *testing.T){} 
+
+func TestPlayersCanPlaceNineShips(t *testing.T){
+	grid:= CreateGrid()
+	updateGrid:= PlayerOnePlaceShips(grid)
+
+	shipCount:= CountOfShipOnBoard(updateGrid)
+	if shipCount!=9{
+		t.Error("Expected nine ships to be placed")
+	}
+}
+func TestPlacingA10thShipDoesntChangeGrid(t *testing.T){}
+func TurnManagement(t *testing.T){}
+
+
+
+
 
 
 
@@ -186,10 +208,17 @@ func TestPlaceShipOutsideTop(t *testing.T){
 	
 
 func TestPlayerOneCannotPlaceTenthShip(t *testing.T) {
-  
-    }
+	grid:= CreateGrid()
+	updateGrid:= PlayerOnePlaceShips(grid)
 
-//func TestPlayerTwoCannotPlaceTenthShip(t *testing.T) {}
+	shipCount:= CountOfShipOnBoard(updateGrid)
+	if shipCount>9{
+		t.Error("Cant place more than 9 ships")
+	}
+}
+    
+
+
 
 	
 	
@@ -296,19 +325,5 @@ func TestPlayerTwoShootingOutsideGrid(t *testing.T) {
 
 
 
-//func TestPlayerOneShipsSunkTwice(t *testing.T){}
-//func TestPlayerTwoShipsSunkTwice(t *testing.T){}
-
-
-/*func TestWinCondition(t *testing.T){
-	grid:= CreateGrid()
-} */
-
-
-//test 9 ships can be placed
-//attempting to place a 10th ship dosent change the grid
-
-//test where a ship can be placed in a grid
-//after taking a shot turn goes to next player
 
 
