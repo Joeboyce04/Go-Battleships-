@@ -170,9 +170,37 @@ func TestPlaceShipOutsideTop(t *testing.T){
 }
 
 func TestPlayerOneCannotPlaceShipOnTopOfAnother(t *testing.T) {
+	grid :=CreateGrid()
+	grid = placeShip(grid, 3 ,3)
+
+	updatedGrid:=placeShip(grid, 3,3)
+
+	if updatedGrid!= grid{
+		t.Error("Player one placed a ship on top of another ship")
+	}
+}
+
+func TestPlayerOneCanSinkShip(t *testing.T) {
+
+	grid:= CreateGrid()
+	grid = placeShip(grid, 3, 3)
+
+	grid[3][3]= "Hit"
+
+	if !ShipSunk(grid, 3, 3){
+		t.Error("Player one should have sunk a ship")
+	}
 }
 func TestPlayerOneShipsSunkTwice(t *testing.T){
-	
+	grid:= CreateGrid()
+	grid = placeShip(grid, 3, 3)
+
+	grid[3][3]= "Hit"
+	grid[3][3]= "Hit"
+
+	if !ShipSunk(grid, 3, 3){
+		t.Error("Player one ship should have not been sunk twice")
+	}
 	}
 
 
@@ -325,5 +353,6 @@ func TestPlayerTwoShootingOutsideGrid(t *testing.T) {
 
 
 
+//func TestAllShipsHit(t *testing.T){}
 
 
