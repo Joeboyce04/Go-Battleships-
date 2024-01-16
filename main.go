@@ -23,6 +23,7 @@ func CountOfShipOnBoard(grid [7][7]string) int {
 	}
 	return count
 }
+
 func placeShip(grid [7][7]string, col, row int) [7][7]string {
 	if col < 0 || col > 6 || row < 0 || row > 6 {
 		return grid
@@ -87,17 +88,7 @@ func PlayerOneTakeShots(grid [7][7]string, col, row int) Shot {
 func PlayerTwoTakeShots(grid [7][7]string, col, row int) Shot {
 	return PlayerTakeShot(grid, col, row)
 }
-func ShipSunk(grid [7][7]string, col, row int) bool {
-	return grid[row][col] == "Hit"
-}
 
-func allShipsHit(grid [7][7]string) bool {
-	for _, row := range grid {
-		for _, location := range row {
-			if location == "Ship" {
-				return false
-			}
-		}
-	}
-	return true
-}
+//func ShipSunk(grid [7][7]string, col, row int) bool {}
+
+//func allShipsHit(grid [7][7]string) bool {}
