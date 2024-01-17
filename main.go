@@ -1,5 +1,7 @@
 package main
 
+import "errors"
+
 type Shot struct {
 	Result string
 }
@@ -24,41 +26,44 @@ func CountOfShipOnBoard(grid [7][7]string) int {
 	return count
 }
 
-func placeShip(grid [7][7]string, col, row int) [7][7]string {
+func placeShip(grid [7][7]string, col, row int) ([7][7]string, error){
 	if col < 0 || col > 6 || row < 0 || row > 6 {
-		return grid
+		return grid, errors.New("Ship was placed outside the grid")
 	}
 
 	if grid[row][col] == "Ship" {
-		return grid
+		return grid, errors.New("Ship cannot be placed on top of another ship")
 	}
 
 	shipCount := CountOfShipOnBoard(grid)
 	if shipCount == 9 {
-		return grid
+		return grid, errors.New("Too many ships trying to be placed")
 	}
 
 	grid[row][col] = "Ship"
-	return grid
+	return grid, nil
 }
 
 func PlayerOnePlaceShips(grid [7][7]string) [7][7]string {
-	grid = placeShip(grid, 1, 2)
-	grid = placeShip(grid, 3, 4)
-	grid = placeShip(grid, 6, 6)
-	grid = placeShip(grid, 0, 0)
-	grid = placeShip(grid, 0, 6)
-	grid = placeShip(grid, 6, 0)
-	grid = placeShip(grid, 1, 1)
-	grid = placeShip(grid, 5, 4)
-	grid = placeShip(grid, 3, 1)
+	grid, _ = placeShip(grid, 1, 2)
+	grid, _ = placeShip(grid, 3, 4)
+	grid, _ = placeShip(grid, 6, 6)
+
+	grid, _ = placeShip(grid, 0, 0)
+	grid, _ = placeShip(grid, 0, 6)
+	grid, _ = placeShip(grid, 6, 0)
+
+	grid, _ = placeShip(grid, 5, 2)
+	grid, _ = placeShip(grid, 5, 4)
+	grid, _ = placeShip(grid, 3, 1)
+	
 
 	return grid
 }
 
 func PlayerTwoPlaceShips(grid [7][7]string) [7][7]string {
-	grid = placeShip(grid, 2, 3)
-	grid = placeShip(grid, 5, 6)
+	grid, _ = placeShip(grid, 2, 3)
+	grid, _ = placeShip(grid, 5, 6)
 
 	return grid
 }

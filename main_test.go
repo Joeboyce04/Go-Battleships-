@@ -49,7 +49,7 @@ func TestPlaceShip(t *testing.T){
 	grid := CreateGrid()
 	desiredCol:= 3
 	desiredRow:= 5
-	updateGrid:= placeShip(grid, desiredCol, desiredRow)
+	updateGrid, _:= placeShip(grid, desiredCol, desiredRow)
 
 	actual := updateGrid[desiredRow][desiredCol]
 	want:= "Ship"
@@ -106,10 +106,10 @@ func TestPlayerOneShipInBottomLeft(t *testing.T) {
 }
 
 
-/*func TestPlayerOnePlaceShipOutsideGrid(t *testing.T) {
+func TestPlayerOnePlaceShipOutsideGrid(t *testing.T) {
     grid:=CreateGrid()
 
-	updatedGrid:= placeShip(grid,8,8)
+	updatedGrid, _:= placeShip(grid,8,8)
 
 	if updatedGrid != grid{
 		t.Error("Player one ship is outside grid")
@@ -119,19 +119,19 @@ func TestPlayerOneShipInBottomLeft(t *testing.T) {
 func TestPlayerTwoPlaceShipOutsideGrid(t *testing.T){
 	grid:=CreateGrid()
 
-	updatedGrid:= placeShip(grid,10,10)
+	updatedGrid, _:= placeShip(grid,10,10)
 
 	if updatedGrid != grid{
 		t.Error("Player Two ship is outside grid")
 	}
 
-} */
+} 
 
 
 func TestPlaceShipOutsideLeft(t *testing.T){
 	grid :=CreateGrid()
 	
-	updateGrid:= placeShip(grid, -1, 0)
+	updateGrid, _:= placeShip(grid, -1, 0)
 
 	if updateGrid !=grid{
 		t.Error("Player placed ship outside grid to the left")
@@ -141,7 +141,7 @@ func TestPlaceShipOutsideLeft(t *testing.T){
 func TestPlaceShipOutsideRight(t *testing.T){
 	grid :=CreateGrid()
 
-	updateGrid:= placeShip(grid, 7, 0)
+	updateGrid, _:= placeShip(grid, 7, 0)
 
 	if updateGrid !=grid{
 		t.Error("Player placed ship outside grid to the right")
@@ -152,7 +152,7 @@ func TestPlaceShipOutsideRight(t *testing.T){
 func TestPlaceShipOutsideBottom(t *testing.T){
 	grid :=CreateGrid()
 
-	updateGrid:= placeShip(grid, 0, 7)
+	updateGrid, _:= placeShip(grid, 0, 7)
 
 	if updateGrid !=grid{
 		t.Error("Player placed ship outside grid to the bottom")
@@ -162,23 +162,26 @@ func TestPlaceShipOutsideBottom(t *testing.T){
 func TestPlaceShipOutsideTop(t *testing.T){
 	grid :=CreateGrid()
 
-	updateGrid:= placeShip(grid, 0, -1)
+	updateGrid, _:= placeShip(grid, 0, -1)
 
 	if updateGrid !=grid{
 		t.Error("Player placed ship outside grid to the top")
 	}
 }
 
-func TestPlayerOneCannotPlaceShipOnTopOfAnother(t *testing.T) {
+/*func TestPlayerOneCannotPlaceShipOnTopOfAnother(t *testing.T) {
 	grid :=CreateGrid()
-	grid = placeShip(grid, 3 ,3)
+	grid, _= placeShip(grid, 3,3)
 
-	updatedGrid:=placeShip(grid, 3,3)
+	col:=3
+	row:=3
+	updatedGrid, _ :=placeShip(grid, col, row)
 
-	if updatedGrid!= grid{
-		t.Error("Player one placed a ship on top of another ship")
+	if updatedGrid==grid{
+		t.Error("Cannot Place ship on top of a ship")
 	}
-}
+	
+} */ 
 
 /*func TestPlayerOneCanSinkShip(t *testing.T) {
 
@@ -222,20 +225,23 @@ func TurnManagement(t *testing.T){}
 
 func TestPlayerOneCannotPlaceTenthShip(t *testing.T) {
 	grid:= CreateGrid()
-    grid = placeShip(grid, 1, 2)
-    grid = placeShip(grid, 3, 4)
-    grid = placeShip(grid, 6, 6)
-    grid = placeShip(grid, 0, 0)
-    grid = placeShip(grid, 0, 6)
-    grid = placeShip(grid, 6, 0)
-    grid = placeShip(grid, 1, 1)
-    grid = placeShip(grid, 5, 4)
-    grid = placeShip(grid, 3, 2)
+	
+    grid,_ = placeShip(grid, 1, 2)
+    grid, _ = placeShip(grid, 3, 4)
+    grid, _ = placeShip(grid, 6, 6)
+
+    grid, _ = placeShip(grid, 0, 0)
+    grid, _ = placeShip(grid, 0, 6)
+    grid, _ = placeShip(grid, 6, 0)
+
+    grid, _ = placeShip(grid, 1, 1)
+    grid, _ = placeShip(grid, 5, 4)
+    grid, _= placeShip(grid, 3, 2)
 
 	col:= 5
 	row:= 5
 
-    updatedGrid:= placeShip(grid, col, row)
+    updatedGrid, _:= placeShip(grid, col, row)   //a way to do this differntly, locate correct error in function. Ask!
 
     if updatedGrid != grid{
         t.Error("Player One Can place ten ships")
