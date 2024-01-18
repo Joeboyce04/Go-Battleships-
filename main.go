@@ -33,7 +33,7 @@ func placeShip(grid [7][7]string, col, row int) ([7][7]string, error){
 
 	if grid[row][col] == "Ship" {
 		return grid, errors.New("Ship cannot be placed on top of another ship")
-	}
+	} 
 
 	shipCount := CountOfShipOnBoard(grid)
 	if shipCount == 9 {

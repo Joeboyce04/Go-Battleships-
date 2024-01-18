@@ -169,19 +169,19 @@ func TestPlaceShipOutsideTop(t *testing.T){
 	}
 }
 
-/*func TestPlayerOneCannotPlaceShipOnTopOfAnother(t *testing.T) {
+func TestPlayerOneCannotPlaceShipOnTopOfAnother(t *testing.T) {
 	grid :=CreateGrid()
 	grid, _= placeShip(grid, 3,3)
 
 	col:=3
 	row:=3
-	updatedGrid, _ :=placeShip(grid, col, row)
+	 _, err :=placeShip(grid, col, row)
 
-	if updatedGrid==grid{
+	if err==nil{
 		t.Error("Cannot Place ship on top of a ship")
 	}
 	
-} */ 
+} 
 
 /*func TestPlayerOneCanSinkShip(t *testing.T) {
 
