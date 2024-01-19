@@ -171,10 +171,10 @@ func TestPlaceShipOutsideTop(t *testing.T){
 
 func TestPlayerOneCannotPlaceShipOnTopOfAnother(t *testing.T) {
 	grid :=CreateGrid()
-	grid, _= placeShip(grid, 3,3)
+	grid, _= placeShip(grid, 1,2)
 
-	col:=3
-	row:=3
+	col:=1
+	row:=2
 	 _, err :=placeShip(grid, col, row)
 
 	if err==nil{
@@ -354,7 +354,22 @@ func TestPlayerTwoShootingOutsideGrid(t *testing.T) {
 	}
 
 
-
+	func TestPlayerCannotShootSameShipLocationTwice(t *testing.T) {
+		
+		grid := CreateGrid()
+		updatedGrid, _ := placeShip(grid, 5, 5) 
+		
+		firstShotResult := PlayerOneTakeShots(updatedGrid, 5, 5)
+		secondShotResult := PlayerOneTakeShots(updatedGrid, 5, 5)
+		
+		if firstShotResult.Result != "Hit" {
+			t.Error("Player's first shot should be a hit")
+		}
+		
+		if secondShotResult.Result == "Already Hit" {
+			t.Error("Player should not be able to shoot the same ship location twice")
+		} 
+	}
 
 //func TestAllShipsHit(t *testing.T){}
 
