@@ -5,6 +5,12 @@ import "errors"
 type Shot struct {
 	Result string
 }
+type Game struct{
+	CurrentPlayer int
+	NextPlayer int
+	GameWon bool
+}
+
 
 func CreateGrid() [7][7]string {
 
@@ -93,6 +99,23 @@ func PlayerOneTakeShots(grid [7][7]string, col, row int) Shot {
 func PlayerTwoTakeShots(grid [7][7]string, col, row int) Shot {
 	return PlayerTakeShot(grid, col, row)
 }
+
+func PlayerTurn(playerOneTurn bool)string{
+	var currentPlayerTurn string
+	if playerOneTurn{
+		currentPlayerTurn = "Player One"
+	}else{
+		currentPlayerTurn = "Player Two"
+	}
+	return currentPlayerTurn
+}
+
+func passTurnToOtherPlayer(playerOneTurn bool)(bool, string){
+	playerOneTurn = !playerOneTurn
+	currentPlayerTurn:=PlayerTurn(playerOneTurn)
+	return playerOneTurn, currentPlayerTurn
+}
+
 
 //func ShipSunk(grid [7][7]string, col, row int) bool {}
 

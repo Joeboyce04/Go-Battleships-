@@ -183,17 +183,7 @@ func TestPlayerOneCannotPlaceShipOnTopOfAnother(t *testing.T) {
 	
 } 
 
-/*func TestPlayerOneCanSinkShip(t *testing.T) {
 
-	grid:= CreateGrid()
-	grid = placeShip(grid, 3, 3)
-
-	grid[3][3]= "Hit"
-
-	if !ShipSunk(grid, 3, 3){
-		t.Error("Player one should have sunk a ship")
-	}
-}*/
 func TestPlayerOneShipsSunkTwice(t *testing.T){
 	
 	}
@@ -241,7 +231,7 @@ func TestPlayerOneCannotPlaceTenthShip(t *testing.T) {
 	col:= 5
 	row:= 5
 
-    updatedGrid, _:= placeShip(grid, col, row)   //a way to do this differntly, locate correct error in function. Ask!
+    updatedGrid, _:= placeShip(grid, col, row) 
 
     if updatedGrid != grid{
         t.Error("Player One Can place ten ships")
@@ -371,6 +361,43 @@ func TestPlayerTwoShootingOutsideGrid(t *testing.T) {
 		} 
 	}
 
+func TestPlayerOneGetsFirstTurn(t* testing.T){
+	playerOneTurn:= true
+
+	 currentPlayerTurn:= PlayerTurn(playerOneTurn)
+
+	if currentPlayerTurn!="Player One"{
+		t.Error("Player One should have the first turn")
+	}
+}
+
+func TestPlayerTwoTurnPassesToPlayerTwo(t *testing.T){
+	playerOneTurn:= false
+
+	playerOneTurn, currentPlayerTurn:= passTurnToOtherPlayer(playerOneTurn)
+
+	if currentPlayerTurn!="Player One"{
+		t.Error("Should be player ones turn after player Two")
+	}
+
+	if !playerOneTurn{
+		t.Error("Player Twos turn should be over")
+	}
+
+}
+func TestPlayerOneTurnPassesToPlayerTwo(t *testing.T){
+
+	playerOneTurn:=true
+	
+	playerOneTurn, currentPlayerTurn:=passTurnToOtherPlayer(playerOneTurn)
+
+	if currentPlayerTurn!="Player Two"{
+		t.Error("Should be player twos turn after player one")
+	}
+	if playerOneTurn{
+		t.Error("Player ones turn should have been finished!!!!!!")
+	}
+}
 //func TestAllShipsHit(t *testing.T){}
 
 
