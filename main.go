@@ -50,27 +50,13 @@ func placeShip(grid [7][7]string, col, row int) ([7][7]string, error){
 	return grid, nil
 }
 
-func PlayerOnePlaceShips(grid [7][7]string) [7][7]string {
-	grid, _ = placeShip(grid, 1, 2)
-	grid, _ = placeShip(grid, 3, 4)
-	grid, _ = placeShip(grid, 6, 6)
-
-	grid, _ = placeShip(grid, 0, 0)
-	grid, _ = placeShip(grid, 0, 6)
-	grid, _ = placeShip(grid, 6, 0)
-
-	grid, _ = placeShip(grid, 5, 2)
-	grid, _ = placeShip(grid, 5, 4)
-	grid, _ = placeShip(grid, 3, 1)
-	
-
+func PlayerOnePlaceShips(grid [7][7]string, col, row int)  [7][7]string {
+	grid, _ = placeShip(grid, col, row )
 	return grid
 }
 
-func PlayerTwoPlaceShips(grid [7][7]string) [7][7]string {
-	grid, _ = placeShip(grid, 2, 3)
-	grid, _ = placeShip(grid, 5, 6)
-
+func PlayerTwoPlaceShips(grid [7][7]string, col, row int) [7][7]string {
+	grid, _ = placeShip(grid, col, row )
 	return grid
 }
 
@@ -116,7 +102,18 @@ func passTurnToOtherPlayer(playerOneTurn bool)(bool, string){
 	return playerOneTurn, currentPlayerTurn
 }
 
+func PlayerWon(grid [7][7]string)bool{
+	for _, row := range grid{
+		for _, location := range row{
+		if location =="Ship"{
+			return false
+		}
 
-//func ShipSunk(grid [7][7]string, col, row int) bool {}
 
-//func allShipsHit(grid [7][7]string) bool {}
+	}
+}
+	return true
+}
+
+
+
