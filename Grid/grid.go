@@ -1,4 +1,4 @@
-package main
+package table
 
 import (
 	"errors"
@@ -49,16 +49,6 @@ func placeShip(grid [7][7]string, col, row int) ([7][7]string, error){
 	return grid, nil
 }
 
-func PlayerOnePlaceShips(grid [7][7]string, col, row int)  [7][7]string {
-	PlayerOnegrid, _ := placeShip(grid, col, row )
-	return PlayerOnegrid
-}
-
-func PlayerTwoPlaceShips(grid [7][7]string, col, row int) [7][7]string {
-	PlayerTwogrid, _ := placeShip(grid, col, row )
-	return 	PlayerTwogrid
-}
-
 func PlayerTakeShot(grid [7][7]string, col, row int) Shot {
 	if col < 0 || col > 6 || row < 0 || row > 6 {
 		return Shot{Result: "Error outside grid"}
@@ -77,43 +67,3 @@ func PlayerTakeShot(grid [7][7]string, col, row int) Shot {
 	}
 	return shot
 }
-
-func PlayerOneTakeShots(grid [7][7]string, col, row int) Shot {
-	return PlayerTakeShot(grid, col, row)
-}
-
-func PlayerTwoTakeShots(grid [7][7]string, col, row int) Shot {
-	return PlayerTakeShot(grid, col, row)
-}
-
-func PlayerTurn(playerOneTurn bool)string{
-	var currentPlayerTurn string
-	if playerOneTurn{
-		currentPlayerTurn = "Player One"
-	}else{
-		currentPlayerTurn = "Player Two"
-	}
-	return currentPlayerTurn
-}
-
-func passTurnToOtherPlayer(playerOneTurn bool)(bool, string){
-	playerOneTurn = !playerOneTurn
-	currentPlayerTurn:=PlayerTurn(playerOneTurn)
-	return playerOneTurn, currentPlayerTurn
-}
-
-func PlayerOneWon(PlayerTwogrid [7][7]string)bool{
-	for _, row := range PlayerTwogrid{
-		for _, location := range row{
-		if location =="Ship" {
-			return false
-		}
-
-
-	}
-}
-	return true
-}
-
-
-
