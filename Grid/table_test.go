@@ -36,3 +36,4 @@ func TestPlaceShip(t *testing.T){
 		t.Error("Ship was not placed at col" ,desiredCol, "row", desiredRow )
 	}
 }
+
