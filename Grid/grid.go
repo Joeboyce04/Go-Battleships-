@@ -1,4 +1,4 @@
-package table
+package grid
 
 import (
 	"errors"
@@ -31,7 +31,7 @@ func CountOfShipOnBoard(grid [7][7]string) int {
 	return count
 }
 
-func placeShip(grid [7][7]string, col, row int) ([7][7]string, error){
+func PlaceShip(grid [7][7]string, col, row int) ([7][7]string, error){
 	if col < 0 || col > 6 || row < 0 || row > 6 {
 		return grid, errors.New("Ship was placed outside the grid")
 	}
