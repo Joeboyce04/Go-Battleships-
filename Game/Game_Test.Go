@@ -1,8 +1,9 @@
 package Game
 
-import ("testing"
-"battleships/Grid"
-"battleships/Player"
+import (
+	grid "battleships/Grid"
+	"battleships/Player"
+	"testing"
 )
 
 func TestPlayerOneGetsFirstTurn(t* testing.T){

@@ -27,17 +27,3 @@ func PlayerWon(grid [7][7]string) bool {
 	}
 	return true
 }
-
-func CountOfShipsOnBoard(grid [7][7]string) int {
-	count := 0
-
-	for _, row := range grid {
-		for _, location := range row {
-			if location == "Ship" {
-				count++
-			}
-
-		}
-	}
-	return count
-} 

@@ -1,7 +1,6 @@
 package Player
 
 import (
-	game "battleships/Game"
 	"errors"
 )
 
@@ -18,7 +17,7 @@ func PlaceShips(grid [7][7]string, col, row int) ([7][7]string, error){
 		return grid, errors.New("Ship cannot be placed on top of another ship")
 	}  
 
-	shipCount := game.CountOfShipsOnBoard(grid)
+	shipCount := CountOfShipsOnBoard(grid)
 	if shipCount == 9 {
 		return grid, errors.New("Too many ships trying to be placed")
 	}
@@ -44,4 +43,18 @@ func PlayerTakeShots(grid [7][7]string, col, row int) Shot {
 		shot.Result = "Miss"
 	}
 	return shot
+}
+
+func CountOfShipsOnBoard(grid [7][7]string) int {
+	count := 0
+
+	for _, row := range grid {
+		for _, location := range row {
+			if location == "Ship" {
+				count++
+			}
+
+		}
+	}
+	return count
 }
