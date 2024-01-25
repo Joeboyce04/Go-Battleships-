@@ -2,8 +2,8 @@ package Game
 
 import ("testing"
 "battleships/Grid"
-"battleships/Player1"
-"battleships/Player2")
+"battleships/Player"
+)
 
 func TestPlayerOneGetsFirstTurn(t* testing.T){
 	playerOneTurn:= true
@@ -47,29 +47,29 @@ func TestPlayerOneTurnPassesToPlayerTwo(t *testing.T){
 func TestPlayerOneWinsAfterSinkingAllShips(t *testing.T) {
 		PlayerTwogrid:= table.CreateGrid()
 		
-		PlayerTwogrid = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 1, 2)
-		PlayerTwogrid = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 2, 3)
-		PlayerTwogrid  = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 3, 4)
+		PlayerTwogrid, _= Player.PlaceShips(PlayerTwogrid, 1, 2)
+		PlayerTwogrid, _ = Player.PlaceShips(PlayerTwogrid, 2, 3)
+		PlayerTwogrid, _ = Player.PlaceShips(PlayerTwogrid, 3, 4)
 
-		PlayerTwogrid  = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 4, 5)
-		PlayerTwogrid = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 5, 6)
-		PlayerTwogrid = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 6, 4)
+		PlayerTwogrid,_  = Player.PlaceShips(PlayerTwogrid, 4, 5)
+		PlayerTwogrid,_ = Player.PlaceShips(PlayerTwogrid, 5, 6)
+		PlayerTwogrid,_ = Player.PlaceShips(PlayerTwogrid, 6, 4)
 
-		PlayerTwogrid = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 5, 1)
-		PlayerTwogrid = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 1, 3)
-		PlayerTwogrid = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 2, 4)
+		PlayerTwogrid,_ = Player.PlaceShips(PlayerTwogrid, 5, 1)
+		PlayerTwogrid,_ = Player.PlaceShips(PlayerTwogrid, 1, 3)
+		PlayerTwogrid, _ = Player.PlaceShips(PlayerTwogrid, 2, 4)
 											
-		Player1.PlayerOneTakeShots(PlayerTwogrid, 1, 2)
-		Player1.PlayerOneTakeShots(PlayerTwogrid, 2, 3)					
-		Player1.PlayerOneTakeShots(PlayerTwogrid, 3, 4)				
+		Player.PlayerTakeShots(PlayerTwogrid, 1, 2)
+		Player.PlayerTakeShots(PlayerTwogrid, 2, 3)					
+		Player.PlayerTakeShots(PlayerTwogrid, 3, 4)				
 
-		Player1.PlayerOneTakeShots(PlayerTwogrid, 4, 5)
-		Player1.PlayerOneTakeShots(PlayerTwogrid, 5, 6)
-		Player1.PlayerOneTakeShots(PlayerTwogrid, 6, 4)
+		Player.PlayerTakeShots(PlayerTwogrid, 4, 5)
+		Player.PlayerTakeShots(PlayerTwogrid, 5, 6)
+		Player.PlayerTakeShots(PlayerTwogrid, 6, 4)
 
-		Player1.PlayerOneTakeShots(PlayerTwogrid, 5, 1)
-		Player1.PlayerOneTakeShots(PlayerTwogrid, 1, 3)
-		Player1.PlayerOneTakeShots(PlayerTwogrid, 2, 4)
+		Player.PlayerTakeShots(PlayerTwogrid, 5, 1)
+		Player.PlayerTakeShots(PlayerTwogrid, 1, 3)
+		Player.PlayerTakeShots(PlayerTwogrid, 2, 4)
 
 		if PlayerWon(PlayerTwogrid){
 			t.Error("Player one should have won")
@@ -81,23 +81,26 @@ func TestPlayerOneWinsAfterSinkingAllShips(t *testing.T) {
 func TestPlayerOneHasNotWonBeforeSinkingAllShips(t *testing.T) {
     
     PlayerTwogrid := table.CreateGrid()
-	PlayerTwogrid = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 1, 2)
-	PlayerTwogrid = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 2, 3)
-	PlayerTwogrid  = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 3, 4)
+		
+	PlayerTwogrid, _= Player.PlaceShips(PlayerTwogrid, 1, 2)
+	PlayerTwogrid, _ = Player.PlaceShips(PlayerTwogrid, 2, 3)
+	PlayerTwogrid, _ = Player.PlaceShips(PlayerTwogrid, 3, 4)
 
-	PlayerTwogrid  = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 4, 5)
-	PlayerTwogrid = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 5, 6)
-	PlayerTwogrid = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 6, 4)
+	PlayerTwogrid,_  = Player.PlaceShips(PlayerTwogrid, 4, 5)
+	PlayerTwogrid,_ = Player.PlaceShips(PlayerTwogrid, 5, 6)
+	PlayerTwogrid,_ = Player.PlaceShips(PlayerTwogrid, 6, 4)
 
-	PlayerTwogrid = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 5, 1)
-	PlayerTwogrid = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 1, 3)
-	PlayerTwogrid = Player2.PlayerTwoPlaceShips(PlayerTwogrid, 2, 4)
+	PlayerTwogrid,_ = Player.PlaceShips(PlayerTwogrid, 5, 1)
+	PlayerTwogrid,_ = Player.PlaceShips(PlayerTwogrid, 1, 3)
+	PlayerTwogrid, _ = Player.PlaceShips(PlayerTwogrid, 2, 4)
+	
+	Player.PlayerTakeShots(PlayerTwogrid, 1, 2)
+	Player.PlayerTakeShots(PlayerTwogrid, 2, 3)					
+	Player.PlayerTakeShots(PlayerTwogrid, 3, 4)				
 
-	Player1.PlayerOneTakeShots(PlayerTwogrid, 1, 2)
-	Player1.PlayerOneTakeShots(PlayerTwogrid, 2, 3)	
-
-	Player1.PlayerOneTakeShots(PlayerTwogrid, 3, 4)				
-	Player1.PlayerOneTakeShots(PlayerTwogrid, 4, 5)
+	Player.PlayerTakeShots(PlayerTwogrid, 4, 5)
+	Player.PlayerTakeShots(PlayerTwogrid, 5, 6)
+	Player.PlayerTakeShots(PlayerTwogrid, 6, 4)
     
     if PlayerWon(PlayerTwogrid) {
         t.Error("Player should not have won")

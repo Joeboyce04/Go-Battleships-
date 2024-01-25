@@ -1,18 +1,29 @@
-package Player1
+package Player
 
 import (
 	table "battleships/Grid"
-	"battleships/Player2"
 	"testing"
 )
 
+func TestPlaceShip(t *testing.T){
+	grid := table.CreateGrid()
+	desiredCol:= 3
+	desiredRow:= 5
+	updateGrid, _:= PlaceShips(grid, desiredCol, desiredRow)
 
+	actual := updateGrid[desiredRow][desiredCol]
+	want:= "Ship"
 
-func TestPlayerOneShipInTopLeftCorner(t *testing.T) {
+	if actual!=want {
+		t.Error("Ship was not placed at col" ,desiredCol, "row", desiredRow )
+	}
+}
+
+func TestPlayerPlaceShipInTopLeftCorner(t *testing.T) {
     
     grid := table.CreateGrid()
     
-    updatedGrid := PlayerOnePlaceShips(grid, 0, 0)
+    updatedGrid, _ := PlaceShips(grid, 0, 0)
     hasShip := updatedGrid[0][0] == "Ship"
     
     if !hasShip {
@@ -20,11 +31,11 @@ func TestPlayerOneShipInTopLeftCorner(t *testing.T) {
     }
 }
 
-func TestPlayerOneShipInTopRight(t *testing.T) {
+func TestPlayerPlaceShipInTopRight(t *testing.T) {
     
     grid := table.CreateGrid()
     
-    updatedGrid := PlayerOnePlaceShips(grid,6, 0)
+    updatedGrid,_ := PlaceShips(grid,6, 0)
     hasShip := updatedGrid[0][6] == "Ship"
     
     if !hasShip {
@@ -32,11 +43,11 @@ func TestPlayerOneShipInTopRight(t *testing.T) {
     }
 }
 
-func TestPlayerOneShipInBottomRight(t *testing.T) {
+func TestPlayerPlaceShipInBottomRight(t *testing.T) {
     
     grid := table.CreateGrid()
     
-    updatedGrid := PlayerOnePlaceShips(grid, 0,6)
+    updatedGrid,_ := PlaceShips(grid, 0,6)
     hasShip := updatedGrid[6][0] == "Ship"
     
     if !hasShip {
@@ -44,11 +55,11 @@ func TestPlayerOneShipInBottomRight(t *testing.T) {
     }
 }
 
-func TestPlayerOneShipInBottomLeft(t *testing.T) {
+func TestPlayerPlaceShipInBottomLeft(t *testing.T) {
     
     grid := table.CreateGrid()
     
-    updatedGrid := PlayerOnePlaceShips(grid, 6,6)
+    updatedGrid,_ := PlaceShips(grid, 6,6)
     hasShip := updatedGrid[6][6] == "Ship"
     
     if !hasShip {
@@ -56,30 +67,30 @@ func TestPlayerOneShipInBottomLeft(t *testing.T) {
     }
 }
 
-func TestPlayerOnePlaceShipOutsideGrid(t *testing.T) {
+func TestPlayerPlaceShipOutsideGrid(t *testing.T) {
     grid:= table.CreateGrid()
 
-	updatedGrid := PlayerOnePlaceShips(grid,8,8)
+	updatedGrid,_ := PlaceShips(grid,8,8)
 
 	if updatedGrid != grid{
 		t.Error("Player one ship is outside grid")
 	}
 }
 
-func TestPlayerOnePlaceShipOutsideLeft(t *testing.T){
+func TestPlayerPlaceShipOutsideLeft(t *testing.T){
 	grid := table.CreateGrid()
 	
-	updateGrid := PlayerOnePlaceShips(grid, -1, 0)
+	updateGrid,_ := PlaceShips(grid, -1, 0)
 
 	if updateGrid !=grid{
 		t.Error("Player One placed ship outside grid to the left")
 	}
 }
 
-func TestPlayerOnePlaceShipOutsideRight(t *testing.T){
+func TestPlayerPlaceShipOutsideRight(t *testing.T){
 	grid := table.CreateGrid()
 
-	updateGrid:= PlayerOnePlaceShips(grid, 7, 0)
+	updateGrid,_ :=PlaceShips(grid, 7, 0)
 
 	if updateGrid !=grid{
 		t.Error("Player One placed ship outside grid to the right")
@@ -87,33 +98,33 @@ func TestPlayerOnePlaceShipOutsideRight(t *testing.T){
 
 } 
 
-func TestPlayerOnePlaceShipOutsideBottom(t *testing.T){
+func TestPlayerPlaceShipOutsideBottom(t *testing.T){
 	grid := table.CreateGrid()
 
-	updateGrid := PlayerOnePlaceShips(grid, 0, 7)
+	updateGrid,_ := PlaceShips(grid, 0, 7)
 
 	if updateGrid !=grid{
 		t.Error("Player One placed ship outside grid to the bottom")
 	}
 }
 
-func TestPlayerOnePlaceShipOutsideTop(t *testing.T){
+func TestPlayerPlaceShipOutsideTop(t *testing.T){
 	grid := table.CreateGrid()
 
-	updateGrid := PlayerOnePlaceShips(grid, 0, -1)
+	updateGrid,_ := PlaceShips(grid, 0, -1)
 
 	if updateGrid !=grid{
 		t.Error("Player One placed ship outside grid to the top")
 	}
 }
 
-func TestPlayerOneCannotPlaceShipOnTopOfAnother(t *testing.T) {
+func TestPlayerCannotPlaceShipOnTopOfAnother(t *testing.T) {
 	grid := table.CreateGrid()
-	grid= PlayerOnePlaceShips(grid, 1,2)
+	grid,_= PlaceShips(grid, 1,2)
 
 	col:=1
 	row:=2
-	_,  err := table.PlaceShip(grid, col, row)				//TWEAK TO PLAYER ONE
+	_,  err := PlaceShips(grid, col, row)				
 
 	if err==nil{
 		t.Error("Cannot Place ship on top of a ship")
@@ -121,25 +132,25 @@ func TestPlayerOneCannotPlaceShipOnTopOfAnother(t *testing.T) {
 	
 } 
 
-func TestPlayerOneCannotPlaceTenthShip(t *testing.T) {
+func TestPlayerCannotPlaceTenthShip(t *testing.T) {
 	grid:= table.CreateGrid()
 	
-	grid,_ = table.PlaceShip(grid, 1, 2)
-    grid, _ =  table.PlaceShip(grid, 3, 4)
-    grid, _ = table.PlaceShip(grid, 6, 6)
+	grid,_ = PlaceShips(grid, 1, 2)
+    grid, _ =  PlaceShips(grid, 3, 4)
+    grid, _ = PlaceShips(grid, 6, 6)
 
-    grid, _ = table.PlaceShip(grid, 0, 0)
-    grid, _ = table.PlaceShip(grid, 0, 6)
-    grid, _ = table.PlaceShip(grid, 6, 0)
+    grid, _ = PlaceShips(grid, 0, 0)
+    grid, _ = PlaceShips(grid, 0, 6)
+    grid, _ = PlaceShips(grid, 6, 0)
 
-    grid, _ = table.PlaceShip(grid, 1, 1)
-    grid, _ = table.PlaceShip(grid, 5, 4)
-    grid, _= table.PlaceShip(grid, 3, 2)
+    grid, _ = PlaceShips(grid, 1, 1)
+    grid, _ = PlaceShips(grid, 5, 4)
+    grid, _= PlaceShips(grid, 3, 2)
 
 	col:= 5
 	row:= 5
 
-    _, err:= table.PlaceShip(grid, col, row)   //TWEAK to player one
+    _, err:= PlaceShips(grid, col, row)   
 
     if err==nil{
         t.Error("Player One Can place ten ships")
@@ -147,14 +158,14 @@ func TestPlayerOneCannotPlaceTenthShip(t *testing.T) {
 	}
 }
     
-func TestPlayerOneHit(t *testing.T) {
+func TestPlayerHit(t *testing.T) {
 	grid := table.CreateGrid()
-	grid = Player2.PlayerTwoPlaceShips(grid,5,6)
+	grid, _ = PlaceShips(grid,5,6)
 	
 	col := 5
 	row := 6
 	
-	ShotResult:= PlayerOneTakeShots(grid, col, row)
+	ShotResult:= PlayerTakeShots(grid, col, row)
 	
 
 
@@ -163,14 +174,14 @@ func TestPlayerOneHit(t *testing.T) {
 	}
 }
 
-func TestPlayerOneMiss(t *testing.T) {
+func TestPlayerMiss(t *testing.T) {
 	grid := table.CreateGrid()
-	grid = Player2.PlayerTwoPlaceShips(grid, 5,5)
+	grid,_ = PlaceShips(grid, 5,5)
 	
 	col := 4
 	row := 4
 	
-	ShotResult:= PlayerOneTakeShots(grid, col, row)
+	ShotResult:= PlayerTakeShots(grid, col, row)
 	
 
 
@@ -179,13 +190,13 @@ func TestPlayerOneMiss(t *testing.T) {
 	}
 }
 
-func TestPlayerOneShootingOutsideGrid(t *testing.T) {
+func TestPlayerShootingOutsideGrid(t *testing.T) {
 	grid := table.CreateGrid()
     
     col := 8
     row := 8
     
-    ShotResult := PlayerOneTakeShots(grid, col, row)          
+    ShotResult := PlayerTakeShots(grid, col, row)          
     
 
    
@@ -195,13 +206,13 @@ func TestPlayerOneShootingOutsideGrid(t *testing.T) {
 } 
 
 
-func TestPlayerOneCannotShootSameShipLocationTwice(t *testing.T) {
+func TestPlayerCannotShootSameShipLocationTwice(t *testing.T) {
 		
 	grid := table.CreateGrid()
-	updatedGrid, _ := table.PlaceShip(grid, 5, 5) 
+	updatedGrid, _ := PlaceShips(grid, 5, 5) 
 	
-	firstShotResult := PlayerOneTakeShots(updatedGrid, 5, 5)
-	secondShotResult := PlayerOneTakeShots(updatedGrid, 5, 5)
+	firstShotResult := PlayerTakeShots(updatedGrid, 5, 5)
+	secondShotResult := PlayerTakeShots(updatedGrid, 5, 5)
 	
 	if firstShotResult.Result != "Hit" {
 		t.Error("Player's first shot should be a hit")
@@ -212,17 +223,19 @@ func TestPlayerOneCannotShootSameShipLocationTwice(t *testing.T) {
 	} 
 }
 
-func TestPlayerOneShipsSunkTwice(t *testing.T){
+func TestPlayerShipsSunkTwice(t *testing.T){
 	grid:= table.CreateGrid()
 	col:= 2
 	row:= 3
-	grid  = PlayerOnePlaceShips(grid, col, row)
+	grid, _  = PlaceShips(grid, col, row)
 
-	Player2.PlayerTwoTakeShots(grid, col, row)
+	PlayerTakeShots(grid, col, row)
 
-	shotResult:= Player2.PlayerTwoTakeShots(grid, col, row)
+	shotResult:= PlayerTakeShots(grid, col, row)
 
 	if shotResult.Result=="Already Hit"{
 		t.Error("Player One should not be able to have its ship sank twice")
 	}
 } 
+
+
