@@ -45,7 +45,7 @@ func TestPlayerOneTurnPassesToPlayerTwo(t *testing.T){
 
 
 func TestPlayerOneWinsAfterSinkingAllShips(t *testing.T) {
-		PlayerTwogrid:= table.CreateGrid()
+		PlayerTwogrid:= grid.CreateGrid()
 		
 		PlayerTwogrid, _= Player.PlaceShips(PlayerTwogrid, 1, 2)
 		PlayerTwogrid, _ = Player.PlaceShips(PlayerTwogrid, 2, 3)
@@ -80,7 +80,7 @@ func TestPlayerOneWinsAfterSinkingAllShips(t *testing.T) {
 
 func TestPlayerOneHasNotWonBeforeSinkingAllShips(t *testing.T) {
     
-    PlayerTwogrid := table.CreateGrid()
+    PlayerTwogrid := grid.CreateGrid()
 		
 	PlayerTwogrid, _= Player.PlaceShips(PlayerTwogrid, 1, 2)
 	PlayerTwogrid, _ = Player.PlaceShips(PlayerTwogrid, 2, 3)

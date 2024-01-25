@@ -1,12 +1,12 @@
 package Player
 
 import (
-	table "battleships/Grid"
+	grid "battleships/Grid"
 	"testing"
 )
 
 func TestPlaceShip(t *testing.T){
-	grid := table.CreateGrid()
+	grid := grid.CreateGrid()
 	desiredCol:= 3
 	desiredRow:= 5
 	updateGrid, _:= PlaceShips(grid, desiredCol, desiredRow)
@@ -21,7 +21,7 @@ func TestPlaceShip(t *testing.T){
 
 func TestPlayerPlaceShipInTopLeftCorner(t *testing.T) {
     
-    grid := table.CreateGrid()
+    grid := grid.CreateGrid()
     
     updatedGrid, _ := PlaceShips(grid, 0, 0)
     hasShip := updatedGrid[0][0] == "Ship"
@@ -33,7 +33,7 @@ func TestPlayerPlaceShipInTopLeftCorner(t *testing.T) {
 
 func TestPlayerPlaceShipInTopRight(t *testing.T) {
     
-    grid := table.CreateGrid()
+    grid := grid.CreateGrid()
     
     updatedGrid,_ := PlaceShips(grid,6, 0)
     hasShip := updatedGrid[0][6] == "Ship"
@@ -45,7 +45,7 @@ func TestPlayerPlaceShipInTopRight(t *testing.T) {
 
 func TestPlayerPlaceShipInBottomRight(t *testing.T) {
     
-    grid := table.CreateGrid()
+    grid := grid.CreateGrid()
     
     updatedGrid,_ := PlaceShips(grid, 0,6)
     hasShip := updatedGrid[6][0] == "Ship"
@@ -57,7 +57,7 @@ func TestPlayerPlaceShipInBottomRight(t *testing.T) {
 
 func TestPlayerPlaceShipInBottomLeft(t *testing.T) {
     
-    grid := table.CreateGrid()
+    grid := grid.CreateGrid()
     
     updatedGrid,_ := PlaceShips(grid, 6,6)
     hasShip := updatedGrid[6][6] == "Ship"
@@ -68,7 +68,7 @@ func TestPlayerPlaceShipInBottomLeft(t *testing.T) {
 }
 
 func TestPlayerPlaceShipOutsideGrid(t *testing.T) {
-    grid:= table.CreateGrid()
+    grid:= grid.CreateGrid()
 
 	updatedGrid,_ := PlaceShips(grid,8,8)
 
@@ -78,7 +78,7 @@ func TestPlayerPlaceShipOutsideGrid(t *testing.T) {
 }
 
 func TestPlayerPlaceShipOutsideLeft(t *testing.T){
-	grid := table.CreateGrid()
+	grid := grid.CreateGrid()
 	
 	updateGrid,_ := PlaceShips(grid, -1, 0)
 
@@ -88,7 +88,7 @@ func TestPlayerPlaceShipOutsideLeft(t *testing.T){
 }
 
 func TestPlayerPlaceShipOutsideRight(t *testing.T){
-	grid := table.CreateGrid()
+	grid := grid.CreateGrid()
 
 	updateGrid,_ :=PlaceShips(grid, 7, 0)
 
@@ -99,7 +99,7 @@ func TestPlayerPlaceShipOutsideRight(t *testing.T){
 } 
 
 func TestPlayerPlaceShipOutsideBottom(t *testing.T){
-	grid := table.CreateGrid()
+	grid := grid.CreateGrid()
 
 	updateGrid,_ := PlaceShips(grid, 0, 7)
 
@@ -109,7 +109,7 @@ func TestPlayerPlaceShipOutsideBottom(t *testing.T){
 }
 
 func TestPlayerPlaceShipOutsideTop(t *testing.T){
-	grid := table.CreateGrid()
+	grid := grid.CreateGrid()
 
 	updateGrid,_ := PlaceShips(grid, 0, -1)
 
@@ -119,7 +119,7 @@ func TestPlayerPlaceShipOutsideTop(t *testing.T){
 }
 
 func TestPlayerCannotPlaceShipOnTopOfAnother(t *testing.T) {
-	grid := table.CreateGrid()
+	grid := grid.CreateGrid()
 	grid,_= PlaceShips(grid, 1,2)
 
 	col:=1
@@ -133,7 +133,7 @@ func TestPlayerCannotPlaceShipOnTopOfAnother(t *testing.T) {
 } 
 
 func TestPlayerCannotPlaceTenthShip(t *testing.T) {
-	grid:= table.CreateGrid()
+	grid:= grid.CreateGrid()
 	
 	grid,_ = PlaceShips(grid, 1, 2)
     grid, _ =  PlaceShips(grid, 3, 4)
@@ -159,7 +159,7 @@ func TestPlayerCannotPlaceTenthShip(t *testing.T) {
 }
     
 func TestPlayerHit(t *testing.T) {
-	grid := table.CreateGrid()
+	grid := grid.CreateGrid()
 	grid, _ = PlaceShips(grid,5,6)
 	
 	col := 5
@@ -175,7 +175,7 @@ func TestPlayerHit(t *testing.T) {
 }
 
 func TestPlayerMiss(t *testing.T) {
-	grid := table.CreateGrid()
+	grid := grid.CreateGrid()
 	grid,_ = PlaceShips(grid, 5,5)
 	
 	col := 4
@@ -191,7 +191,7 @@ func TestPlayerMiss(t *testing.T) {
 }
 
 func TestPlayerShootingOutsideGrid(t *testing.T) {
-	grid := table.CreateGrid()
+	grid := grid.CreateGrid()
     
     col := 8
     row := 8
@@ -208,7 +208,7 @@ func TestPlayerShootingOutsideGrid(t *testing.T) {
 
 func TestPlayerCannotShootSameShipLocationTwice(t *testing.T) {
 		
-	grid := table.CreateGrid()
+	grid := grid.CreateGrid()
 	updatedGrid, _ := PlaceShips(grid, 5, 5) 
 	
 	firstShotResult := PlayerTakeShots(updatedGrid, 5, 5)
@@ -224,7 +224,7 @@ func TestPlayerCannotShootSameShipLocationTwice(t *testing.T) {
 }
 
 func TestPlayerShipsSunkTwice(t *testing.T){
-	grid:= table.CreateGrid()
+	grid:= grid.CreateGrid()
 	col:= 2
 	row:= 3
 	grid, _  = PlaceShips(grid, col, row)
