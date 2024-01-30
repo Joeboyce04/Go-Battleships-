@@ -10,16 +10,16 @@ type Shot struct {
 
 func PlaceShips(grid [7][7]string, col, row int) ([7][7]string, error){
 	if col < 0 || col > 6 || row < 0 || row > 6 {
-		return grid, errors.New("Ship was placed outside the grid")
+		return grid, errors.New("ship was placed outside the grid")
 	}
 
 	if grid[row][col] == "Ship" {
-		return grid, errors.New("Ship cannot be placed on top of another ship")
+		return grid, errors.New("ship cannot be placed on top of another ship")
 	}  
 
 	shipCount := CountOfShipsOnBoard(grid)
 	if shipCount == 9 {
-		return grid, errors.New("Too many ships trying to be placed")
+		return grid, errors.New("too many ships trying to be placed")
 	}
 
 	grid[row][col] = "Ship"

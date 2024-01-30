@@ -107,3 +107,52 @@ func TestPlayerOneHasNotWonBeforeSinkingAllShips(t *testing.T) {
         t.Error("Player should not have won")
     }
 }
+
+func TestTurnChangesWhenPlayerMissesShot(t *testing.T) {
+    playerOneTurn := true
+    grid := grid.CreateGrid()
+
+    Player.PlayerTakeShots(grid, 3, 3)
+    
+    playerOneTurn, currentPlayer := passTurnToOtherPlayer(playerOneTurn)
+    
+    want := "Player Two"
+    got := currentPlayer
+    if playerOneTurn != false || got != want {
+        t.Errorf("Players turn should change when missed shot")
+    }
+}
+
+
+
+func TestTurnChangesWhenPlayerHitsShip(t *testing.T) {
+    
+    playerOneTurn := true
+    grid := grid.CreateGrid()
+    grid, _ = Player.PlaceShips(grid, 3, 3)
+    
+    Player.PlayerTakeShots(grid, 3, 3)
+    
+    playerOneTurn, currentPlayer := passTurnToOtherPlayer(playerOneTurn)
+    
+    want := "Player Two"
+    got := currentPlayer
+    if playerOneTurn != false || got != want {
+        t.Errorf("Players turn changed when player hit ship")
+    }
+}
+
+func TestTurnDoesNotChangeIfShotIsInvalid(t *testing.T) {
+    
+    playerOneTurn := true
+    grid := grid.CreateGrid()
+    
+    Player.PlayerTakeShots(grid, 7, 7)
+    
+    currentPlayer := PlayerTurn(playerOneTurn)
+    want := "Player One"
+    got := currentPlayer
+    if playerOneTurn != true || got != want {
+        t.Errorf("Players turn does not change after invalid shot")
+    }
+}
