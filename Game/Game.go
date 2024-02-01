@@ -1,13 +1,11 @@
 package Game
 
 func PlayerTurn(playerOneTurn bool) string {
-	var currentPlayerTurn string
 	if playerOneTurn {
-		currentPlayerTurn = "Player One"
-	} else {
-		currentPlayerTurn = "Player Two"
+		return "Player One"
 	}
-	return currentPlayerTurn
+	return "Player Two"
+
 }
 
 func passTurnToOtherPlayer(playerOneTurn bool) (bool, string) {
