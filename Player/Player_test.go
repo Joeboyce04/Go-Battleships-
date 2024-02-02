@@ -238,5 +238,13 @@ func TestPlayerShipsSunkTwice(t *testing.T){
 	}
 } 
 
+func TestPlayerCannotWinWithInvalidShipPlacement(t *testing.T){
+	grid:= grid.CreateGrid()
 
+	_, err :=PlaceShips(grid, 7,7)
+
+	if err == nil{
+		t.Error("Player should not have won with an invalid ship placement")
+	}
+}
 

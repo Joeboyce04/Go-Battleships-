@@ -156,3 +156,24 @@ func TestTurnDoesNotChangeIfShotIsInvalid(t *testing.T) {
         t.Errorf("Players turn does not change after invalid shot")
     }
 }
+
+func TestPlayerCannotWinWithInvalidShot(t *testing.T){
+	grid:= grid.CreateGrid()
+
+	Player.PlayerTakeShots(grid,9,9)
+
+	if PlayerWon(grid){
+		t.Error("Player should not have won with an invalid shot")
+	}
+}
+
+func TestPlayerCannotWinWithInvalidShipPlacement(t *testing.T){
+	grid:= grid.CreateGrid()
+
+	updatedGrid,_ :=PlaceShips(grid, 9,9)
+
+	if PlayerWon(updatedGrid){
+		
+		t.Error("Player should not have won with an invalid ship placement")
+	}
+}

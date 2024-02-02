@@ -8,12 +8,12 @@ type Shot struct {
 	Result string
 }
 
-func validCoordinates(col, row int)bool{
+func ValidCoordinates(col, row int)bool{
 	return col<0 || col>6 || row<0  || row>6
 }
 
 func PlaceShips(grid [7][7]string, col, row int) ([7][7]string, error){
-	if validCoordinates(col, row){
+	if ValidCoordinates(col, row){
 		return grid, errors.New("ship was placed outside the grid")
 	}
 
@@ -32,22 +32,22 @@ func PlaceShips(grid [7][7]string, col, row int) ([7][7]string, error){
 
 
 func PlayerTakeShots(grid [7][7]string, col, row int) Shot {
-	if validCoordinates(col, row){
+	if ValidCoordinates(col, row){
 		return Shot{Result: "Error outside grid"} 
 	}
-	shot := Shot{Result: ""}
 
 	if grid[row][col] == "Hit" {
-		shot.Result = "Already Hit"
-	} else if grid[row][col] == "Ship" {
-		grid[row][col] = "Hit"
-		shot.Result = "Hit"
-	} else {
-		grid[row][col] = "Miss"
-		shot.Result = "Miss"
+		return Shot{Result: "Already Hit"} 
 	}
-	return shot
-}
+	if grid[row][col] == "Ship" {
+		grid[row][col] = "Hit"
+		return Shot{Result: "Hit"} 
+	} 
+
+		grid[row][col] = "Miss"
+		return Shot{Result: "Miss"} 
+	}
+
 
 func CountOfShipsOnBoard(grid [7][7]string) int {
 	count := 0
